@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackLink index{% endblock %}
+
+{% block body %}
+    <h1>BackLink index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>MySite</th>
+                <th>HisSite</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for back_link in back_links %}
+            <tr>
+                <td>{{ back_link.id }}</td>
+                <td>{{ back_link.mySite }}</td>
+                <td>{{ back_link.hisSite }}</td>
+                <td>{{ back_link.CreatedAt ? back_link.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('back_link_show', {'id': back_link.id}) }}">show</a>
+                    <a href="{{ path('back_link_edit', {'id': back_link.id}) }}">edit</a>
+                    <a href="{{ path('back_link_analyse', {'id': back_link.id}) }}">analyse</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('back_link_new') }}">Create new</a>
+{% endblock %}

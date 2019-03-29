@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackLink{% endblock %}
+
+{% block body %}
+    <h1>BackLink</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ back_link.id }}</td>
+            </tr>
+            <tr>
+                <th>MySite</th>
+                <td>{{ back_link.mySite }}</td>
+            </tr>
+            <tr>
+                <th>HisSite</th>
+                <td>{{ back_link.hisSite }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ back_link.CreatedAt ? back_link.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('back_link_index') }}">back to list</a>
+
+    <a href="{{ path('back_link_edit', {'id': back_link.id}) }}">edit</a>
+
+<h1>BackLinkLog</h1>
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>BackLink</th>
+                <th>From</th>
+                <th>CreatedAt</th>
+                <th>FoundIt</th>
+                <th>LogText</th>
+            </tr>
+         
+            {% for back_link_log in back_link_logs %}
+            <tr>
+                <td>{{ back_link_log.id }}</td>
+                <td>{{ back_link_log.backlink.mySite }}</td>
+                <td>{{ back_link_log.backlink.hisSite }}</td>
+                <td>{{ back_link_log.createdAt ? back_link_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ back_link_log.foundIt ? 'Yes' : 'No' }}</td>
+                <td>{{ back_link_log.logText }}</td>
+            </tr>
+             {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {{ include('back_link/_delete_form.html.twig') }}
+{% endblock %}

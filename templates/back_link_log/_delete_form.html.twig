@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('back_link_log_delete', {'id': back_link_log.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ back_link_log.id) }}">
+    <button class="btn">Delete</button>
+</form>

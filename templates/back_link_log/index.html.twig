@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackLinkLog index{% endblock %}
+
+{% block body %}
+    <h1>BackLinkLog index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BackLink</th>
+                <th>From</th>
+                <th>CreatedAt</th>
+                <th>FoundIt</th>
+                <th>LogText</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for back_link_log in back_link_logs %}
+            <tr>
+                <td>{{ back_link_log.id }}</td>
+                <td>{{ back_link_log.backlink.mySite }}</td>
+                <td>{{ back_link_log.backlink.hisSite }}</td>
+                <td>{{ back_link_log.createdAt ? back_link_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ back_link_log.foundIt ? 'Yes' : 'No' }}</td>
+                <td>{{ back_link_log.logText }}</td>
+                <td>
+                    <a href="{{ path('back_link_log_show', {'id': back_link_log.id}) }}">show</a>
+                    <a href="{{ path('back_link_log_edit', {'id': back_link_log.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('back_link_log_new') }}">Create new</a>
+{% endblock %}
