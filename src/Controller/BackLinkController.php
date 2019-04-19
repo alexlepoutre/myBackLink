@@ -51,6 +51,44 @@ class BackLinkController extends AbstractController
     }
 
     /**
+     * @Route("/cron", name="back_link_cron", methods={"GET"})
+     */
+    public function blcron(BackLinkRepository $backLinkRepository, BackLinkLogRepository $backLinkLogRepository): Response
+    {
+        $backLinks = $backLinkRepository->findAll();
+
+        foreach ( $backLinks as $backLink ) {
+
+            $backLinkLog = new BackLinkLog;
+
+            $backLinkLog->setCreatedAt(new \DateTime('now'));
+
+            $site = $backLink->getMySite();
+            $url = $backLink->getHisSite();
+
+            if (preg_match("#$site(.*)</a>#Ui", file_get_contents($url), $titre) != '') 
+            {
+                $backLinkLog->setFoundIt(true);
+                $backLinkLog->setLogText($backLink->getMySite() . substr($titre[1],0,255));
+            }
+            else
+            {
+                $backLinkLog->setFoundIt(false);
+                $backLinkLog->setLogText('');
+            }
+            
+            
+            $backLinkLog->setBackLink($backLink);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($backLinkLog);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('back_link_index');
+        
+    }
+
+    /**
      * @Route("/{id}", name="back_link_show", methods={"GET"})
      */
     public function show(BackLinkLogRepository $backLinkLogRepository, BackLink $backLink): Response
