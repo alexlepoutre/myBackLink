@@ -70,11 +70,13 @@ class BackLinkController extends AbstractController
             {
                 $backLinkLog->setFoundIt(true);
                 $backLinkLog->setLogText($backLink->getMySite() . substr($titre[1],0,255));
+                $backLink->setFoundIt(true);
             }
             else
             {
                 $backLinkLog->setFoundIt(false);
                 $backLinkLog->setLogText('');
+                $backLink->setFoundIt(false);
             }
             
             
@@ -82,8 +84,11 @@ class BackLinkController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($backLinkLog);
-            $entityManager->flush();
+            $entityManager->persist($backLink);
         }
+
+        $entityManager->flush();
+
         return $this->redirectToRoute('back_link_index');
         
     }

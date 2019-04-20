@@ -1,9 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BackLink index{% endblock %}
+{% block title %}BackLink IT-Room{% endblock %}
 
 {% block body %}
-    <h1>BackLink index</h1>
+    <h1>BackLink IT-Room</h1>
+<div class="container">
+    {% for back_link in back_links %}
+        <h2>{{ back_link.mySite }}</h2>
+        <p>
+            sur -> {{ back_link.hisSite }}<br>
+            Présent : {% if back_link.foundIt == 1 %} Oui {% else %} Non {% endif %}
+            <a href="{{ path('back_link_show', {'id': back_link.id}) }}">Afficher</a>
+        </p>
+    {% else %}
+        no records found
+    {% endfor %}
+</div>
+
 
     <table class="table">
         <thead>

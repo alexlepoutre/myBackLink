@@ -38,6 +38,11 @@ class BackLink
      */
     private $backLinkLogs;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $foundIt;
+
     public function __construct()
     {
         $this->backLinkLogs = new ArrayCollection();
@@ -111,6 +116,18 @@ class BackLink
                 $backLinkLog->setBackLink(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFoundIt(): ?bool
+    {
+        return $this->foundIt;
+    }
+
+    public function setFoundIt(?bool $foundIt): self
+    {
+        $this->foundIt = $foundIt;
 
         return $this;
     }
