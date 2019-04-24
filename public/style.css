@@ -1,0 +1,18 @@
+
+    h1 {
+        color: #016faf;
+    }
+    .row {
+        word-wrap: break-word;
+        background: #016faf;
+        color: #FFFFFF;
+    }
+    .lien {
+        color: #FFFFFF;
+    }
+    .oui {
+        color: #58fb58;
+    }
+    .non {
+        color: red;
+    }
