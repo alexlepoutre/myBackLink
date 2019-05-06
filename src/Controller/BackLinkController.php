@@ -12,9 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/")
- */
 class BackLinkController extends AbstractController
 {
     /**
@@ -28,7 +25,7 @@ class BackLinkController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="back_link_new", methods={"GET","POST"})
+     * @Route("/admin/new", name="back_link_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -94,7 +91,7 @@ class BackLinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="back_link_show", methods={"GET"})
+     * @Route("/admin/{id}/show", name="back_link_show", methods={"GET"})
      */
     public function show(BackLinkLogRepository $backLinkLogRepository, BackLink $backLink): Response
     {
@@ -105,7 +102,7 @@ class BackLinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="back_link_edit", methods={"GET","POST"})
+     * @Route("/admin/{id}/edit", name="back_link_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, BackLink $backLink): Response
     {
@@ -127,7 +124,7 @@ class BackLinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/analyse", name="back_link_analyse", methods={"GET","POST"})
+     * @Route("/admin/{id}/analyse", name="back_link_analyse", methods={"GET","POST"})
      */
     public function analyse(BackLinkLogRepository $backLinkLogRepository, BackLink $backLink): Response
     {
@@ -161,7 +158,7 @@ class BackLinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="back_link_delete", methods={"DELETE"})
+     * @Route("/admin/bl/{id}", name="back_link_delete", methods={"DELETE"})
      */
     public function delete(Request $request, BackLink $backLink): Response
     {

@@ -10,6 +10,11 @@
         {% endblock %}
     </head>
     <body>
+    {% if app.user %}
+        {{ app.user.username }} <a href='/logout'>deconnexion</a>
+    {% else %}
+       <a href='/connexion'>connexion</a>
+    {% endif %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
